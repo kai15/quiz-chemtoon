@@ -423,21 +423,21 @@ const jsonData = {
         "correctoption": "option1",
         "options": {
           "option1": <Image
-          style={{width:310, height: 125}}
-          source={require('../assets/A.png')}
-      />,
+            style={{ width: 310, height: 125 }}
+            source={require('../assets/A.png')}
+          />,
           "option2": <Image
-          style={{width:315, height: 125}}
-          source={require('../assets/B.png')}
-      />,
+            style={{ width: 315, height: 125 }}
+            source={require('../assets/B.png')}
+          />,
           "option3": <Image
-          style={{width:270, height: 150}}
-          source={require('../assets/C.png')}
-      />,
+            style={{ width: 270, height: 150 }}
+            source={require('../assets/C.png')}
+          />,
           "option4": <Image
-          style={{width:330, height: 120}}
-          source={require('../assets/D.png')}
-      />
+            style={{ width: 330, height: 120 }}
+            source={require('../assets/D.png')}
+          />
         },
         "pilih": "5",
         "question": "Rumus struktur ABS di bawah ini yang benar adalah..."
@@ -722,6 +722,7 @@ const jsonData = {
   }
 }
 export default class Quiz extends Component {
+  sounds = null
   constructor(props) {
     super(props);
     this.qno = 0
@@ -745,9 +746,8 @@ export default class Quiz extends Component {
       kosong: 0,
       check: null,
       click: false,
-      jawaban: ["", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "", "", "", ""],
+      jawaban: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
     }
-
   }
 
   prev() {
@@ -758,20 +758,21 @@ export default class Quiz extends Component {
       } else {
         this.setState({ check: Number(this.state.jawaban[this.qno].split("option")[1]) - 1 })
       }
-      this.setState({ 
-        question: arrnew[this.qno].question, 
-        options: arrnew[this.qno].options, 
-        correctoption: arrnew[this.qno].correctoption, 
+      this.setState({
+        question: arrnew[this.qno].question,
+        options: arrnew[this.qno].options,
+        correctoption: arrnew[this.qno].correctoption,
         images: arrnew[this.qno].image,
-        title: arrnew[this.qno].title })
+        title: arrnew[this.qno].title
+      })
     }
     // if(this.qno == 3 || this.qno == 6 || this.qno == 9 || this.qno == 12 || this.qno == 15 || this.qno == 18 || this.qno == 21 || this.qno == 24 || this.qno == 27){
     //   this.refs._scrollView.scrollTo({x: 5, y: 5, animated: false});
     // }
   }
-  
+
   next() {
-    if (this.qno < 29 ) {
+    if (this.qno < 29) {
       this.qno++
       if (this.state.jawaban[this.qno] == "") {
         this.setState({ check: null })
@@ -779,24 +780,24 @@ export default class Quiz extends Component {
         this.setState({ check: Number(this.state.jawaban[this.qno].split("option")[1]) - 1 })
       }
 
-      this.setState({ 
-        countCheck: 0, 
-        question: arrnew[this.qno].question, 
-        options: arrnew[this.qno].options, 
-        correctoption: arrnew[this.qno].correctoption, 
+      this.setState({
+        countCheck: 0,
+        question: arrnew[this.qno].question,
+        options: arrnew[this.qno].options,
+        correctoption: arrnew[this.qno].correctoption,
         images: arrnew[this.qno].image,
         title: arrnew[this.qno].title
       })
 
-      if(this.qno == 3 || this.qno == 6 || this.qno == 9 || this.qno == 12 || this.qno == 15 || this.qno == 18 || this.qno == 21 || this.qno == 24 || this.qno == 27){
-        this.refs._scrollView.scrollTo({x: 5, y: 5, animated: false});
+      if (this.qno == 3 || this.qno == 6 || this.qno == 9 || this.qno == 12 || this.qno == 15 || this.qno == 18 || this.qno == 21 || this.qno == 24 || this.qno == 27) {
+        this.refs._scrollView.scrollTo({ x: 5, y: 5, animated: false });
       }
 
-    } else if (this.qno == 28){
+    } else if (this.qno == 28) {
       this.setState({
         nextButton: 'Selesai'
       });
-    } else if (this.qno == 29){
+    } else if (this.qno == 29) {
       this.qno++
       this.generateScore()
     }
@@ -810,19 +811,19 @@ export default class Quiz extends Component {
 
 
     // if (status == true) {
-      // const count = this.state.countCheck + 1
-      // this.setState({ countCheck: count })
-      // if (ans == this.state.correctoption) {
-      //   this.score += 1
-      // }
-      // console.warn(status, ans)
+    // const count = this.state.countCheck + 1
+    // this.setState({ countCheck: count })
+    // if (ans == this.state.correctoption) {
+    //   this.score += 1
+    // }
+    // console.warn(status, ans)
     // } else {
-      // const count = this.state.countCheck - 1
-      // this.setState({ countCheck: count })
-      // if (ans != this.state.correctoption) {
-      //   this.score -= 1
-      // }
-      // console.warn(status, ans, count)
+    // const count = this.state.countCheck - 1
+    // this.setState({ countCheck: count })
+    // if (ans != this.state.correctoption) {
+    //   this.score -= 1
+    // }
+    // console.warn(status, ans, count)
     // }
     // console.warn(this.state.countCheck)
   }
@@ -831,11 +832,11 @@ export default class Quiz extends Component {
     let score = this.score
     let nilai = this.state.jawaban.map(function (value, index) {
       if (value == arrnew[index].correctoption) {
-        return score+1
-      } else if(value == ""){
+        return score + 1
+      } else if (value == "") {
         return score
       } else {
-        return score-1
+        return score - 1
       }
     })
 
@@ -845,7 +846,7 @@ export default class Quiz extends Component {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
     }
 
-    this.setState({nilai, benar: counts[1] == undefined ? 0 : counts[1], salah: counts[-1] == undefined ? 0 : counts[-1], kosong: counts[0] == undefined ? 0 : counts[0] })
+    this.setState({ nilai, benar: counts[1] == undefined ? 0 : counts[1], salah: counts[-1] == undefined ? 0 : counts[-1], kosong: counts[0] == undefined ? 0 : counts[0] })
   }
 
   render() {
@@ -853,138 +854,138 @@ export default class Quiz extends Component {
     const currentOptions = this.state.options
     const currentImages = this.state.images
     const options = Object.keys(currentOptions).map(function (k, index) {
-      return (<View key={index} style={{flex:1, flexGrow: 1, margin: 10, flexShrink: 1 }}>
+      return (<View key={index} style={{ flex: 1, flexGrow: 1, margin: 10, flexShrink: 1 }}>
         <Animbutton countCheck={_this.state.countCheck} status={_this.state.click} onColor={_this.state.check == index ? "#00B9FF" : "transparent"} onColorText={_this.state.check == index ? "white" : "#696969"} effect={"rubberBand"} _onPress={() => _this._answer(k, index)} option={_this.qno == 17 ? 'gambar' : null} text={currentOptions[k]} />
       </View>)
     });
-  
+
     const images = Object.keys(currentImages).map(function (k, index) {
       return (
-        <Image 
-          key={index} 
+        <Image
+          key={index}
           style={
-            currentImages[k] == 1 || 
-            currentImages[k] == 10 ||
-            currentImages[k] == 19 ||
-            currentImages[k] == 28 || 
-            currentImages[k] == 37 || 
-            currentImages[k] == 46 || 
-            currentImages[k] == 59 || 
-            currentImages[k] == 68 || 
-            currentImages[k] == 77 || 
-            currentImages[k] == 86 || 
-            currentImages[k] == 95 ? 
-            {resizeMode:'contain', alignSelf: "center", width: 400, height: 80} : styles.image} 
-            source={currentImages[k]} /> )
+            currentImages[k] == 1 ||
+              currentImages[k] == 10 ||
+              currentImages[k] == 19 ||
+              currentImages[k] == 28 ||
+              currentImages[k] == 37 ||
+              currentImages[k] == 46 ||
+              currentImages[k] == 59 ||
+              currentImages[k] == 68 ||
+              currentImages[k] == 77 ||
+              currentImages[k] == 86 ||
+              currentImages[k] == 95 ?
+              { resizeMode: 'contain', alignSelf: "center", width: 400, height: 80 } : styles.image}
+          source={currentImages[k]} />)
     });
 
     return (
       <ScrollView ref='_scrollView'>
         <View>
           {this.qno < 30 ?
-          <View style={{ flex: 1}}>
-            <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 20, color: '#000', marginTop: 10, marginBottom: -20}}> {this.state.title} </Text>
-            
-            {images}
+            <View style={{ flex: 1 }}>
+              <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20, color: '#000', marginTop: 10, marginBottom: -20 }}> {this.state.title} </Text>
 
-            <View style={{marginLeft: 16}}>
-              <Text style={styles.welcome}>
-                {this.state.question}
-              </Text>
-            </View>
-            <View>
-              {options}
-            </View>
-              <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', alignSelf: 'center'}}>
+              {images}
+
+              <View style={{ marginLeft: 16 }}>
+                <Text style={styles.welcome}>
+                  {this.state.question}
+                </Text>
+              </View>
+              <View>
+                {options}
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
                 {this.qno == 0 ? (null) : <TouchableOpacity
-                    style = {{
+                  style={{
                     borderRadius: 15,
                     padding: 10,
                     marginLeft: 5,
                     marginRight: 10,
                     marginBottom: 20,
                     alignSelf: 'center',
-                    width: Dimensions.get("window").width/3,
+                    width: Dimensions.get("window").width / 3,
                     backgroundColor: '#00B9FF'
-                    }}
-                    onPress={() => this.prev()}
+                  }}
+                  onPress={() => this.prev()}
                 >
-                    <Text style = {{fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold"}}>{this.state.backButton}</Text>
+                  <Text style={{ fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold" }}>{this.state.backButton}</Text>
                 </TouchableOpacity>}
-                
+
                 <TouchableOpacity
-                    style = {{
+                  style={{
                     borderRadius: 15,
                     padding: 10,
                     marginRight: 10,
                     marginBottom: 20,
                     alignSelf: 'center',
-                    width: Dimensions.get("window").width/3,
+                    width: Dimensions.get("window").width / 3,
                     backgroundColor: '#00B9FF'
-                    }}
-                    onPress={() => this.next()}
-                >
-                    <Text style = {{fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold"}}>{this.state.nextButton}</Text>
-                </TouchableOpacity>
-            </View>
-          </View> : 
-          <View style={{flex: 1, backgroundColor: '#44C7FA', justifyContent: 'center'}}>
-            <Text style={{textAlign: "center", marginTop: 30, fontWeight: 'bold', fontSize: 30, color: '#FFFFFF', marginBottom: 20}}> Score </Text>
-            <View style={{justifyContent: 'center', alignItems: 'center', alignContent: 'center', alignSelf: 'center', borderWidth: 7, borderColor: '#FFFFFF', width: 320, height: 250, borderRadius: 10}}>
-              <Text style={{textAlign: "center", fontWeight: 'bold', fontSize: 27, color: '#FFFFFF'}}>
-                  Benar : {this.state.benar}
-              </Text>
-              <Text style={{textAlign: "center", marginTop: 30, fontWeight: 'bold', fontSize: 27, color: '#FFFFFF'}}>
-                  Salah : {this.state.salah}
-              </Text> 
-              <Text style={{textAlign: "center", marginTop: 30, fontWeight: 'bold', fontSize: 27, color: '#FFFFFF'}}>
-                  Tidak dijawab : {this.state.kosong}
-              </Text>
-            </View>
-          <View style={{flexDirection: 'column'}}>
-              <TouchableOpacity
-                  style = {{
-                  borderRadius: 15,
-                  padding: 10,
-                  alignSelf: "center",
-                  marginTop: 40,
-                  width: Dimensions.get("window").width/2,
-                  backgroundColor: '#fff'
                   }}
-                  onPress={() => this.props.navigation.navigate('Score', {nilai: this.state.nilai} )}
-              >
-                  <Text style = {{fontSize: 15, color: '#0091EA', textAlign: "center", fontWeight: "bold"}}> Score Report </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                  style = {{
-                  borderRadius: 15,
-                  padding: 10,
-                  alignSelf: 'center',
-                  marginTop: 20,
-                  width: Dimensions.get("window").width/2,
-                  backgroundColor: '#0091EA'
+                  onPress={() => this.next()}
+                >
+                  <Text style={{ fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold" }}>{this.state.nextButton}</Text>
+                </TouchableOpacity>
+              </View>
+            </View> :
+            <View style={{ flex: 1, backgroundColor: '#44C7FA', justifyContent: 'center' }}>
+              <Text style={{ textAlign: "center", marginTop: 30, fontWeight: 'bold', fontSize: 30, color: '#FFFFFF', marginBottom: 20 }}> Score </Text>
+              <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', alignSelf: 'center', borderWidth: 7, borderColor: '#FFFFFF', width: 320, height: 250, borderRadius: 10 }}>
+                <Text style={{ textAlign: "center", fontWeight: 'bold', fontSize: 27, color: '#FFFFFF' }}>
+                  Benar : {this.state.benar}
+                </Text>
+                <Text style={{ textAlign: "center", marginTop: 30, fontWeight: 'bold', fontSize: 27, color: '#FFFFFF' }}>
+                  Salah : {this.state.salah}
+                </Text>
+                <Text style={{ textAlign: "center", marginTop: 30, fontWeight: 'bold', fontSize: 27, color: '#FFFFFF' }}>
+                  Tidak dijawab : {this.state.kosong}
+                </Text>
+              </View>
+              <View style={{ flexDirection: 'column' }}>
+                <TouchableOpacity
+                  style={{
+                    borderRadius: 15,
+                    padding: 10,
+                    alignSelf: "center",
+                    marginTop: 40,
+                    width: Dimensions.get("window").width / 2,
+                    backgroundColor: '#fff'
+                  }}
+                  onPress={() => this.props.navigation.navigate('Score', { nilai: this.state.nilai })}
+                >
+                  <Text style={{ fontSize: 15, color: '#0091EA', textAlign: "center", fontWeight: "bold" }}> Score Report </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    borderRadius: 15,
+                    padding: 10,
+                    alignSelf: 'center',
+                    marginTop: 20,
+                    width: Dimensions.get("window").width / 2,
+                    backgroundColor: '#0091EA'
                   }}
                   onPress={() => this.props.navigation.navigate('WelcomeScreen')}
-              >
-                  <Text style = {{fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold"}}> Menu Utama </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                  style = {{
-                  borderRadius: 15,
-                  padding: 10,
-                  alignSelf: 'center',
-                  marginTop: 20,
-                  width: Dimensions.get("window").width/2,
-                  backgroundColor: '#F61415'
+                >
+                  <Text style={{ fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold" }}> Menu Utama </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    borderRadius: 15,
+                    padding: 10,
+                    alignSelf: 'center',
+                    marginTop: 20,
+                    width: Dimensions.get("window").width / 2,
+                    backgroundColor: '#F61415'
                   }}
                   onPress={() => BackHandler.exitApp()}
-              >
-                  <Text style = {{fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold"}}> Keluar </Text>
-              </TouchableOpacity>
-          </View>
-          <ImageBackground source={require("../assets/unyil.png")} style={{width: 100, height: 150, alignSelf: "flex-end", bottom: 0}}/>
-          </View>
-         }
+                >
+                  <Text style={{ fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold" }}> Keluar </Text>
+                </TouchableOpacity>
+              </View>
+              <ImageBackground source={require("../assets/unyil.png")} style={{ width: 100, height: 150, alignSelf: "flex-end", bottom: 0 }} />
+            </View>
+          }
         </View>
       </ScrollView>
     );
@@ -993,15 +994,15 @@ export default class Quiz extends Component {
 
 const styles = StyleSheet.create({
   image: {
-    resizeMode:'contain', 
-    alignSelf: "center", 
-    width: 340, 
+    resizeMode: 'contain',
+    alignSelf: "center",
+    width: 340,
     height: 240
   },
   welcome: {
     fontSize: 16,
-    fontWeight: 'bold', 
-    marginBottom: 10, 
+    fontWeight: 'bold',
+    marginBottom: 10,
     color: '#000000',
   },
   instructions: {

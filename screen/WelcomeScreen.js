@@ -23,32 +23,33 @@ class WelcomeScreen extends React.Component {
     playSound() {
         let sounds = new Sound(require('../assets/bensound-sunny.mp3'), (error, sound) => {
             if (error) {
-              alert('error' + error.message);
-              return
+                alert('error' + error.message);
+                return
             }
+            sounds.setNumberOfLoops(-1)
             sounds.play(() => sounds.release())
-          })
+        })
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
-                <Image 
-                    style = {styles.image}
-                    source = {require('../assets/welcomescreen.png')}
+                <Image
+                    style={styles.image}
+                    source={require('../assets/welcomescreen.png')}
                 />
-                <View style={{position: 'absolute',  top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
                     <TouchableOpacity
-                        style = {{
+                        style={{
                             borderRadius: 15,
                             padding: 10,
                             marginTop: 420,
-                            width: Dimensions.get("window").width/2,
+                            width: Dimensions.get("window").width / 2,
                             backgroundColor: '#F61415'
                         }}
                         onPress={() => this.props.navigation.navigate('Quiz')}
                     >
-                        <Text style = {{ fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold"}}>Klik Disini Untuk Memulai</Text>
+                        <Text style={{ fontSize: 15, color: '#FFFFFF', textAlign: "center", fontWeight: "bold" }}>Klik Disini Untuk Memulai</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -57,11 +58,11 @@ class WelcomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: Dimensions.get("screen").width,
-    height: Dimensions.get("screen").height,
-  },
+    container: {
+        flex: 1,
+        width: Dimensions.get("screen").width,
+        height: Dimensions.get("screen").height,
+    },
     image: {
         flex: 1,
         width: null,
