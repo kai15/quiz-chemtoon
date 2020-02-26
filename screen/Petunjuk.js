@@ -16,7 +16,7 @@ class Petunjuk extends React.Component {
                         Aplikasi ini merupakan aplikasi permainan komik kimia yang memodifikasi dari webtoon.
                         Setiap chapter komik akan ada soal sesuai dengan topik yang ada pada komik.
                         Jawablah pertanyaan sesuai dengan jawaban yang paling tepat menurut anda.
-                        Diakhir sesi akan disediakan hasil dan kunci jawaban serta  .
+                        Diakhir sesi akan disediakan hasil dan kunci jawaban serta pembahasannya.
                 </Text>
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
